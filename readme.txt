@@ -5,7 +5,7 @@ Requires at least: 3.8
 Tested up to: 4.0
 Author URI: http://toolstack.com
 Plugin URI: http://toolstack.com/default-post-datetime
-Stable tag: 0.1
+Stable tag: 1.0
 License: GPL2
 
 Set the default date and time when you create a new post.
@@ -15,6 +15,7 @@ Set the default date and time when you create a new post.
 When you create a new post in WordPress, the publish date is set to 'immediately', this plugin allows you more control over this behaviour and set a date or time of your choosing.
 
 For example, you can choose to have new posts scheduled for:
+
 * first Tuesday of next month at 5:30pm
 * next Monday at 09:00
 * Friday at 19:30
@@ -48,11 +49,18 @@ No, strtotime() does not support internationalization and therefore neither does
 
 == Changelog ==
 
+= 1.0 =
+* Added some colour to the validation icons.
+* Added support for using the latest scheduled post to calculate the date from.
+* Added rate/review and page links to the plugin list.
+* Added exclusion for post types.
+* Fixed button styling on the profile page.
+
 = 0.1 =
 * Initial release.
 
 == Upgrade Notice ==
 
-= 0.1 =
+= 1.0 =
 None.
 
