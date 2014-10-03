@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Default Post Date and Time
-Version: 1.0
+Version: 1.1
 Plugin URI: http://toolstack.com/default-post-datetime
 Author: Greg Ross
 Author URI: http://toolstack.com/
@@ -17,7 +17,7 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 
 // Set our version for use later as a define.
-define( 'DPDT_VER', '1.0' );
+define( 'DPDT_VER', '1.1' );
 
 // Our admin page is pretty basic, really just an about box at this time.
 function default_post_datetime_admin_page()
@@ -74,6 +74,8 @@ function default_post_datetime_hook( $data , $postarr )
 
 		if( !array_key_exists( 'uselastpost', $options ) ) { $options['uselastpost'] = 'off'; }
 
+		if( !is_array( $options['disable'] ) ) { $options['disable'] = array();	} 
+		
 		if( array_key_exists( $data['post_type'], $options['disable'] ) ) 
 			{
 			if( $options['disable'][$data['post_type']] == 'on' )
