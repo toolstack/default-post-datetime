@@ -73,7 +73,15 @@ function default_post_datetime_hook( $data , $postarr )
 		$options = get_the_author_meta( 'default_post_datetime', $cuid );
 
 		if( !array_key_exists( 'uselastpost', $options ) ) { $options['uselastpost'] = 'off'; }
-		
+
+		if( array_key_exists( $data['post_type'], $options['disable'] ) ) 
+			{
+			if( $options['disable'][$data['post_type']] == 'on' )
+				{
+				return $data;
+				}
+			}
+			
 		// If both date and time are left blank, just fall back to the WordPress default behaviour.
 		if( !( $options['date'] == '' && $options['time'] == '' && $options['uselastpost'] != 'on' ) ) 
 			{

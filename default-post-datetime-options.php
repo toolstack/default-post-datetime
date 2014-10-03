@@ -114,6 +114,13 @@ function default_post_datetime_user_profile_fields( $user )
 		</tr>
 
 		<tr>
+			<th></th>
+			<td>
+			<input type='button' id='date_check' name='date_check' class='button' value='Validate' onClick='DefaultPostDateTimeValidate()'>
+			</td>
+		</tr>
+
+		<tr>
 			<th>
 			<?php echo __("Use latest scheduled post as the starting time");?>: 
 			</th>
@@ -123,11 +130,26 @@ function default_post_datetime_user_profile_fields( $user )
 		</tr>
 
 		<tr>
-			<th></th>
+			<th>
+			<?php echo __("Disable for post type");?>: 
+			</th>
 			<td>
-			<input type='button' id='date_check' name='date_check' class='button' value='Validate' onClick='DefaultPostDateTimeValidate()'>
+			<?php
+				$post_types = get_post_types( '', 'objects' ); 
+
+				foreach ( $post_types as $post_type ) {
+
+				echo '			<input type="checkbox" id="default_post_datetime_disable_' . $post_type->name . '" name="default_post_datetime[disable][' . $post_type->name . ']"';
+				if( default_post_datetime_get_checked_state( $options['disable'][$post_type->name] ) == 'on' ) { echo ' CHECKED'; }
+				echo ">" . $post_type->label . "<br>\n";
+				}
+
+
+			?>
 			</td>
 		</tr>
+		
+		
 	</table>
 <?php 
 	}
