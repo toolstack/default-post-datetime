@@ -40,10 +40,9 @@ function default_post_datetime_user_profile_fields( $user )
 	// has been written yet, so let's do that now.
 	if( get_the_author_meta( 'default_post_datetime', $user->ID ) == "" )
 		{
-	
 		if ( current_user_can( 'edit_user', $user ) ) 
 			{
-			update_user_meta( $user->ID, 'default_post_datetime', array( 'date' => '', 'time' => '' ) );
+			update_user_meta( $user->ID, 'default_post_datetime', array( 'date' => '', 'time' => '', 'uselastpost' => '' ) );
 			}
 		}
 	
@@ -97,24 +96,36 @@ function default_post_datetime_user_profile_fields( $user )
 	</table>
 	<table class="form-table" id='default_post_datetime_options_table'>	
 		<tr>
-			<th></th>
-			<td>
+			<th>
 			<?php echo __("Date");?>: 
+			</th>
+			<td>
 			<input type="text" id="default_post_datetime_date" name="default_post_datetime[date]" size='40' value='<?php echo $options['date']?>'><div id="default-post-datetime-date-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-date-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
 			</td>
 		</tr>
+
 		<tr>
-			<th></th>
-			<td>
+			<th>
 			<?php echo __("Time");?>: 
+			</th>
+			<td>
 			<input type="text" id="default_post_datetime_time" name="default_post_datetime[time]" size='10' value='<?php echo $options['time']?>'><div id="default-post-datetime-time-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-time-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
+			</td>
+		</tr>
+
+		<tr>
+			<th>
+			<?php echo __("Use latest scheduled post as the starting time");?>: 
+			</th>
+			<td>
+			<input type="checkbox" id="default_post_datetime_uselastpost" name="default_post_datetime[uselastpost]"<?php if( default_post_datetime_get_checked_state( $options['uselastpost'] ) == 'on' ) { echo ' CHECKED'; } ?>>
 			</td>
 		</tr>
 
 		<tr>
 			<th></th>
 			<td>
-			<input type='button' id='date_check' name='date_check' style='button button_primary' value='Validate' onClick='DefaultPostDateTimeValidate()'>
+			<input type='button' id='date_check' name='date_check' class='button' value='Validate' onClick='DefaultPostDateTimeValidate()'>
 			</td>
 		</tr>
 	</table>

@@ -65,22 +65,48 @@ function default_post_datetime_save_profile( $user )
 
 function default_post_datetime_hook( $data , $postarr )
 	{
+	GLOBAL $wpdb;
+	
 	if( empty( $postarr['post_date'] ) || '0000-00-00 00:00:00' == $postarr['post_date'] ) 
 		{
 		$cuid = get_current_user_id();
 		$options = get_the_author_meta( 'default_post_datetime', $cuid );
 
+		if( !array_key_exists( 'uselastpost', $options ) ) { $options['uselastpost'] = 'off'; }
+		
 		// If both date and time are left blank, just fall back to the WordPress default behaviour.
-		if( !( $options['date'] == '' && $options['time'] == '' ) ) 
+		if( !( $options['date'] == '' && $options['time'] == '' && $options['uselastpost'] != 'on' ) ) 
 			{
+			// Use the current start time by default.
+			$starttime = time();
+
+			// Check to see if we're been told to use the existing scheduled posts to base our date calculation on.
+			if( $options['uselastpost'] == 'on' )
+				{
+				// Find the post with the farthest time stamp in the future.
+				$result = $wpdb->get_var( "SELECT ID FROM " . $wpdb->posts . " WHERE post_status = 'future' AND post_type = '" . $data['post_type']. "' ORDER BY post_date DESC LIMIT 1" );
+
+				// If we found one, set the start time.
+				if( !empty( $result ) )
+					{
+					$starttime = get_the_time('U', $result ); // Get the timestamp for the last post
+					}
+					
+				// If the date is blank, use the future  date.
+				if( $options['date'] == '' ) { $options['date'] = date('Y-m-d', $starttime); }
+				
+				// If time is left blank, use the future time.
+				if( $options['time'] == '' ) { $options['time'] = date('G:i:s', $starttime); }
+				}
+
 			// If the date is blank, use today's date.
 			if( $options['date'] == '' ) { $options['date'] = date('Y-m-d'); }
 			
 			// If time is left blank, use the current time.
 			if( $options['time'] == '' ) { $options['time'] = date('G:i:s'); }
-
+				
 			// Calculate the new date/time.
-			$newtime = strtotime( $options['date'] . ' ' . $options['time'] );
+			$newtime = strtotime( $options['date'] . ' ' . $options['time'], $starttime );
 			
 			$data['post_date'] = date( 'Y-m-d G:i:s', $newtime );
 			$data['post_date_gmt'] = get_gmt_from_date( $data['post_date'] );
