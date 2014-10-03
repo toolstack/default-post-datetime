@@ -116,6 +116,25 @@ function default_post_datetime_hook( $data , $postarr )
 	return $data;
 	}
 
+// Add a WordPress plugin page and rating links to the meta information to the plugin list.
+function default_post_datetime_add_meta_links($links, $file) 
+	{
+	if( $file == plugin_basename(__FILE__) ) 
+		{
+		$plugin_url = 'http://wordpress.org/plugins/default-post-datetime/';
+		
+		$links[] = '<a href="'. $plugin_url .'" target="_blank" title="'. __('Click here to visit the plugin on WordPress.org') .'">'. __('Visit WordPress.org page') .'</a>';
+		
+		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/default-post-datetime?rate=5#postform';
+		$links[] = '<a href="'. $rate_url .'" target="_blank" title="'. __('Click here to rate and review this plugin on WordPress.org') .'">'. __('Rate this plugin') .'</a>';
+		}
+	
+	return $links;
+	}
+
+// Add a WordPress plugin page and rating links to the meta information to the plugin list.
+add_filter('plugin_row_meta', 'default_post_datetime_add_meta_links', 10, 2);
+	
 // Add the hook to the insert post code.
 add_filter( 'wp_insert_post_data', 'default_post_datetime_hook', '99', 2 );	
 
