@@ -40,7 +40,7 @@ function default_post_datetime_user_profile_fields( $user )
 	// has been written yet, so let's do that now.
 	if( get_the_author_meta( 'default_post_datetime', $user->ID ) == "" )
 		{
-		if ( current_user_can( 'edit_user', $user ) ) 
+		if ( current_user_can( 'edit_user', $user->ID ) ) 
 			{
 			update_user_meta( $user->ID, 'default_post_datetime', array( 'date' => '', 'time' => '', 'uselastpost' => '' ) );
 			}
@@ -138,10 +138,11 @@ function default_post_datetime_user_profile_fields( $user )
 				$post_types = get_post_types( '', 'objects' ); 
 
 				foreach ( $post_types as $post_type ) {
-
-				echo '			<input type="checkbox" id="default_post_datetime_disable_' . $post_type->name . '" name="default_post_datetime[disable][' . $post_type->name . ']"';
-				if( default_post_datetime_get_checked_state( $options['disable'][$post_type->name] ) == 'on' ) { echo ' CHECKED'; }
-				echo ">" . $post_type->label . "<br>\n";
+					echo '			<input type="checkbox" id="default_post_datetime_disable_' . $post_type->name . '" name="default_post_datetime[disable][' . $post_type->name . ']"';
+					if( array_key_exists( $post_type->name, $options['disable'] ) ) {
+						if( default_post_datetime_get_checked_state( $options['disable'][$post_type->name] ) == 'on' ) { echo ' CHECKED'; }
+					}
+					echo ">" . $post_type->label . "<br>\n";
 				}
 
 

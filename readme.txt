@@ -49,6 +49,10 @@ No, strtotime() does not support internationalization and therefore neither does
 
 == Changelog ==
 
+= 1.2 =
+* Fixed WP_Debug warning on profile screen.
+* Fixed user id bug on profile screen.
+
 = 1.1 =
 * Fixed PHP warning when no post types had been excluded on new post creation.
 
