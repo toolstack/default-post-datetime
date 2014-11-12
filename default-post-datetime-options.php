@@ -36,6 +36,9 @@ function default_post_datetime_save_user_profile_fields( $user_id )
 */
 function default_post_datetime_user_profile_fields( $user ) 
 	{ 
+	// If the user cannot edit posts or pages, then we don't want to display the options as they won't be using them.
+	if ( !current_user_can( 'edit_posts', $user ) || !current_user_can( 'edit_pages', $user ) ) { return; }
+
 	// Check to see if this is the first time we've run for this user and no config
 	// has been written yet, so let's do that now.
 	if( get_the_author_meta( 'default_post_datetime', $user->ID ) == "" )
