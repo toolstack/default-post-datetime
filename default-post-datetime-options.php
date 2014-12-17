@@ -51,6 +51,8 @@ function default_post_datetime_user_profile_fields( $user )
 	
 	$options = get_the_author_meta( 'default_post_datetime', $user->ID );
 
+	if( !is_array($options['disable']) ) { $options['disable'] = array(); }
+	
 	wp_register_script( 'strtotime_js', plugins_url( '', __FILE__ )  . '/strtotime.js' );
 	wp_enqueue_script( 'strtotime_js' );
 	
