@@ -2,7 +2,7 @@
 Contributors: GregRoss
 Tags: admin
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.2
 Author URI: http://toolstack.com
 Plugin URI: http://toolstack.com/default-post-datetime
 Stable tag: 1.1
