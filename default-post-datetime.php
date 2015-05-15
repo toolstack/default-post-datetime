@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Default Post Date and Time
-Version: 1.1
+Version: 1.2
 Plugin URI: http://toolstack.com/default-post-datetime
 Author: Greg Ross
 Author URI: http://toolstack.com/
@@ -11,13 +11,13 @@ Compatible with WordPress 3+.
 
 Read the accompanying readme.txt file for instructions and documentation.
 
-Copyright (c) 2012-14 by Greg Ross
+Copyright (c) 2012-15 by Greg Ross
 
 This software is released under the GPL v2.0, see license.txt for details
 */
 
 // Set our version for use later as a define.
-define( 'DPDT_VER', '1.1' );
+define( 'DPDT_VER', '1.2' );
 
 // Our admin page is pretty basic, really just an about box at this time.
 function default_post_datetime_admin_page()

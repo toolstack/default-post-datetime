@@ -5,7 +5,7 @@ Requires at least: 3.8
 Tested up to: 4.2
 Author URI: http://toolstack.com
 Plugin URI: http://toolstack.com/default-post-datetime
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPL2
 
 Set the default date and time when you create a new post.
@@ -50,13 +50,17 @@ No, strtotime() does not support internationalization and therefore neither does
 == Changelog ==
 
 = 1.2 =
+* Release date: May 15, 2015
 * Fixed WP_Debug warning on profile screen.
 * Fixed user id bug on profile screen.
+* Fixed user profile only displays if the user has edit privileges.
 
 = 1.1 =
+* Release date: October 3, 2014
 * Fixed PHP warning when no post types had been excluded on new post creation.
 
 = 1.0 =
+* Release date: October 3, 2014
 * Added some colour to the validation icons.
 * Added support for using the latest scheduled post to calculate the date from.
 * Added rate/review and page links to the plugin list.
@@ -64,6 +68,7 @@ No, strtotime() does not support internationalization and therefore neither does
 * Fixed button styling on the profile page.
 
 = 0.1 =
+* Release date: October 2, 2014
 * Initial release.
 
 == Upgrade Notice ==
