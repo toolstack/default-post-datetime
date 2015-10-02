@@ -5,7 +5,7 @@ Requires at least: 3.8
 Tested up to: 4.3
 Author URI: http://toolstack.com
 Plugin URI: http://toolstack.com/default-post-datetime
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPL2
 
 Set the default date and time when you create a new post.
