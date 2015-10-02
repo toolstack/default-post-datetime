@@ -49,7 +49,7 @@ No, strtotime() does not support internationalization and therefore neither does
 
 == Changelog ==
 = 1.3 =
-* Release date: TBD
+* Release date: October 2, 2015
 * Added translation domain.
 * Fixed WP_Debug warning on profile screen.
 
