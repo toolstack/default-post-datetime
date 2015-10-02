@@ -51,13 +51,14 @@ function default_post_datetime_user_profile_fields( $user )
 	
 	$options = get_the_author_meta( 'default_post_datetime', $user->ID );
 
+	if( !array_key_exists('disable', $options) ) { $options['disable'] = array(); }
 	if( !is_array($options['disable']) ) { $options['disable'] = array(); }
 	
 	wp_register_script( 'strtotime_js', plugins_url( '', __FILE__ )  . '/strtotime.js' );
 	wp_enqueue_script( 'strtotime_js' );
 	
 	?>
-	<h3 id=DefaultPostDateTime>Default Post Date and Time</h3>
+	<h3 id=DefaultPostDateTime><?php _e('Default Post Date and Time', 'default-post-datetime');?></h3>
 
 	<script>
 	function DefaultPostDateTimeValidate() 
@@ -93,16 +94,16 @@ function default_post_datetime_user_profile_fields( $user )
 		<tr>
 			<th></th>
 			<td>
-			<span class="description"><?php echo __("The following date and time will be used for the defaults when you create a new post.");?></span><br><br>
-			<span class="description"><?php echo sprintf( __("The date can use the standard %sPHP strtotime()%s format, for example you can set the date to 'next Tuesday' and a new post will have a default date of the following Tuesday set.  You may leave the fields blank to use the default WordPress behaviour."), "<a href='http://php.net/manual/en/datetime.formats.php'>", "</a>");?></span><br><br>
-			<span class="description"><?php echo __("You should validate your settings with the button supplied.");?></span>
+			<span class="description"><?php echo __("The following date and time will be used for the defaults when you create a new post.", 'default-post-datetime');?></span><br><br>
+			<span class="description"><?php echo sprintf( __("The date can use the standard %sPHP strtotime()%s format, for example you can set the date to 'next Tuesday' and a new post will have a default date of the following Tuesday set.  You may leave the fields blank to use the default WordPress behaviour.", 'default-post-datetime'), "<a href='http://php.net/manual/en/datetime.formats.php'>", "</a>");?></span><br><br>
+			<span class="description"><?php echo __("You should validate your settings with the button supplied.", 'default-post-datetime');?></span>
 			</td>
 		</tr>
 	</table>
 	<table class="form-table" id='default_post_datetime_options_table'>	
 		<tr>
 			<th>
-			<?php echo __("Date");?>: 
+			<?php echo __("Date", 'default-post-datetime');?>: 
 			</th>
 			<td>
 			<input type="text" id="default_post_datetime_date" name="default_post_datetime[date]" size='40' value='<?php echo $options['date']?>'><div id="default-post-datetime-date-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-date-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
@@ -111,7 +112,7 @@ function default_post_datetime_user_profile_fields( $user )
 
 		<tr>
 			<th>
-			<?php echo __("Time");?>: 
+			<?php echo __("Time", 'default-post-datetime');?>: 
 			</th>
 			<td>
 			<input type="text" id="default_post_datetime_time" name="default_post_datetime[time]" size='10' value='<?php echo $options['time']?>'><div id="default-post-datetime-time-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-time-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
@@ -127,16 +128,16 @@ function default_post_datetime_user_profile_fields( $user )
 
 		<tr>
 			<th>
-			<?php echo __("Use latest scheduled post as the starting time");?>: 
+			<?php echo __("Use latest scheduled post as the starting time", 'default-post-datetime');?>: 
 			</th>
 			<td>
-			<input type="checkbox" id="default_post_datetime_uselastpost" name="default_post_datetime[uselastpost]"<?php if( default_post_datetime_get_checked_state( $options['uselastpost'] ) == 'on' ) { echo ' CHECKED'; } ?>>
+			<input type="checkbox" id="default_post_datetime_uselastpost" name="default_post_datetime[uselastpost]"<?php if( !array_key_exists( 'uselastpost', $options ) ) { $options['uselastpost'] = ''; } if( default_post_datetime_get_checked_state( $options['uselastpost'] ) == 'on' ) { echo ' CHECKED'; } ?>>
 			</td>
 		</tr>
 
 		<tr>
 			<th>
-			<?php echo __("Disable for post type");?>: 
+			<?php echo __("Disable for post type", 'default-post-datetime');?>: 
 			</th>
 			<td>
 			<?php

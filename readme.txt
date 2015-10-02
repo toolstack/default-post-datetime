@@ -48,6 +48,10 @@ No, strtotime() does not support internationalization and therefore neither does
 2. A screenshot of the user settings page.
 
 == Changelog ==
+= 1.3 =
+* Release date: TBD
+* Added translation domain.
+* Fixed WP_Debug warning on profile screen.
 
 = 1.2 =
 * Release date: May 15, 2015

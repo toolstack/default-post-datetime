@@ -5,6 +5,8 @@ Version: 1.2
 Plugin URI: http://toolstack.com/default-post-datetime
 Author: Greg Ross
 Author URI: http://toolstack.com/
+Text Domain: default-post-datetime
+Domain Path: /languages/
 Description: Set the default date and time when you create a new post.
 
 Compatible with WordPress 3+.
@@ -27,18 +29,18 @@ function default_post_datetime_admin_page()
 <div class="wrap">
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">&nbsp;<?php _e('User Settings');?>&nbsp;</span></legend>
-		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Default Post Date and Time heading.'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '#DefaultPostDateTime">', '</a>' );?></p>
+		<p><?php echo sprintf(__('User settings can be found in %syour profile page%s, under the Default Post Date and Time heading.', 'default-post-datetime'), '<a href="' . get_edit_profile_url(get_current_user_id()) . '#DefaultPostDateTime">', '</a>' );?></p>
 	</fieldset>
 
 	<fieldset style="border:1px solid #cecece;padding:15px; margin-top:25px" >
 		<legend><span style="font-size: 24px; font-weight: 700;">About</span></legend>
-		<h2><?php echo __('Default Post Date and Time Version') . ' ' . DPDT_VER;?></h2>
-		<p><?php echo __('by');?> Greg Ross</p>
+		<h2><?php echo __('Default Post Date and Time Version', 'default-post-datetime') . ' ' . DPDT_VER;?></h2>
+		<p><?php echo __('by', 'default-post-datetime');?> Greg Ross</p>
 		<p>&nbsp;</p>
-		<p><?php printf(__('Licenced under the %sGPL Version 2%s'), '<a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>', '</a>');?></p>
-		<p><?php printf(__('To find out more, please visit the %sWordPress Plugin Directory page%s or the plugin home page on %sToolStack.com%s'), '<a href="http://wordpress.org/plugins/default-post-datetime/" target=_blank>', '</a>', '<a href="http://toolstack.com/default-post-datetime" target=_blank>', '</a>');?></p>
+		<p><?php printf(__('Licenced under the %sGPL Version 2%s', 'default-post-datetime'), '<a href="http://www.gnu.org/licenses/gpl-2.0.html" target=_blank>', '</a>');?></p>
+		<p><?php printf(__('To find out more, please visit the %sWordPress Plugin Directory page%s or the plugin home page on %sToolStack.com%s', 'default-post-datetime'), '<a href="http://wordpress.org/plugins/default-post-datetime/" target=_blank>', '</a>', '<a href="http://toolstack.com/default-post-datetime" target=_blank>', '</a>');?></p>
 		<p>&nbsp;</p>
-		<p><?php printf(__("Don't forget to %srate and review%s it too!"), '<a href="http://wordpress.org/support/view/plugin-reviews/default-post-datetime" target=_blank>', '</a>');?></p>
+		<p><?php printf(__("Don't forget to %srate and review%s it too!", 'default-post-datetime'), '<a href="http://wordpress.org/support/view/plugin-reviews/default-post-datetime" target=_blank>', '</a>');?></p>
 </fieldset>
 </div>
 	<?php
@@ -47,7 +49,7 @@ function default_post_datetime_admin_page()
 	
 function default_post_datetime_admin()
 {
-	add_options_page( 'Default Post Date and Time', 'Default Post Date and Time', 'manage_options', basename( __FILE__ ), 'default_post_datetime_admin_page');
+	add_options_page( __('Default Post Date and Time', 'default-post-datetime'), __('Default Post Date and Time', 'default-post-datetime'), 'manage_options', basename( __FILE__ ), 'default_post_datetime_admin_page');
 }
 
 // Add the profile fields 
@@ -133,10 +135,10 @@ function default_post_datetime_add_meta_links($links, $file)
 		{
 		$plugin_url = 'http://wordpress.org/plugins/default-post-datetime/';
 		
-		$links[] = '<a href="'. $plugin_url .'" target="_blank" title="'. __('Click here to visit the plugin on WordPress.org') .'">'. __('Visit WordPress.org page') .'</a>';
+		$links[] = '<a href="'. $plugin_url .'" target="_blank" title="'. __('Click here to visit the plugin on WordPress.org', 'default-post-datetime') .'">'. __('Visit WordPress.org page', 'default-post-datetime') .'</a>';
 		
 		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/default-post-datetime?rate=5#postform';
-		$links[] = '<a href="'. $rate_url .'" target="_blank" title="'. __('Click here to rate and review this plugin on WordPress.org') .'">'. __('Rate this plugin') .'</a>';
+		$links[] = '<a href="'. $rate_url .'" target="_blank" title="'. __('Click here to rate and review this plugin on WordPress.org', 'default-post-datetime') .'">'. __('Rate this plugin', 'default-post-datetime') .'</a>';
 		}
 	
 	return $links;
