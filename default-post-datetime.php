@@ -144,6 +144,16 @@ function default_post_datetime_add_meta_links($links, $file)
 	return $links;
 	}
 
+// Load the translation code.
+function default_post_datetime_language() {
+	load_plugin_textdomain('default-post-datetime', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
+	__('Default Post Date and Time', 'default-post-datetime');
+	__('Set the default date and time when you create a new post.', 'default-post-datetime');
+}
+
+// Add translation action.
+add_action('plugins_loaded', 'default_post_datetime_language');
+		
 // Add a WordPress plugin page and rating links to the meta information to the plugin list.
 add_filter('plugin_row_meta', 'default_post_datetime_add_meta_links', 10, 2);
 	
