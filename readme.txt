@@ -5,7 +5,7 @@ Requires at least: 3.8
 Tested up to: 4.3
 Author URI: http://toolstack.com
 Plugin URI: http://toolstack.com/default-post-datetime
-Stable tag: 1.3
+Stable tag: 1.3.1
 License: GPL2
 
 Set the default date and time when you create a new post.
@@ -48,9 +48,13 @@ No, strtotime() does not support internationalization and therefore neither does
 2. A screenshot of the user settings page.
 
 == Changelog ==
+= 1.3.1 =
+* Release date: October 5, 2015
+* Added load_plugin_textdomain() call
+
 = 1.3 =
 * Release date: October 2, 2015
-* Added translation domain.
+* Added translation. domain.
 * Fixed WP_Debug warning on profile screen.
 
 = 1.2 =
