@@ -20,7 +20,7 @@ For example, you can choose to have new posts scheduled for:
 * next Monday at 09:00
 * Friday at 19:30
 
-Any format that PHP's (strtotime)[http://php.net/manual/en/datetime.formats.php] function can understand can be used.
+Any format that PHP's [strtotime](http://php.net/manual/en/datetime.formats.php) function can understand can be used.
 
 Settings are on a per user basis, just go to your profile page!
 
