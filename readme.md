@@ -5,7 +5,7 @@
 **Tested up to:** 6.1.1  
 **Author URI:** http://toolstack.com  
 **Plugin URI:** http://toolstack.com/default-post-datetime  
-**Stable tag:** 1.3.1  
+**Stable tag:** 1.4  
 **License:** GPL2  
 
 Set the default date and time when you create a new post.
@@ -21,6 +21,11 @@ For example, you can choose to have new posts scheduled for:
 * Friday at 19:30
 
 Any format that PHP's [strtotime](http://php.net/manual/en/datetime.formats.php) function can understand can be used.
+
+In addition, you can set the default post date/time to be based on:
+
+* The day after your last currently scheduled post
+* the next day that doesn't have a scheduled post already
 
 Settings are on a per user basis, just go to your profile page!
 
@@ -38,6 +43,8 @@ This code is released under the GPL v2, see license.txt for details.
 
 The validate button uses JavaScript to do it's work and JavaScript does not have a strtotime() function and so not all cases may be supported.  If the configuration you have set is working as you expect you can safely ignore the validation errors.
 
+As of version 1.4, the strtotime function as been significantly enhanced as more cases are supported.
+
 ### Can I use non-English words in the date/time fields? ###
 
 No, strtotime() does not support internationalization and therefore neither does this plugin.
@@ -52,6 +59,11 @@ No, strtotime() does not support internationalization and therefore neither does
 
 
 ## Changelog ##
+### 1.4 ###
+* Release date: TBD
+* Added "Use the next day without a post" option.
+* Updated strtotime js library.
+
 ### 1.3.1 ###
 * Release date: October 5, 2015
 * Added load_plugin_textdomain() call
