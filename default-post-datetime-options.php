@@ -6,12 +6,12 @@ This software is released under the GPL v2.0, see license.txt for details
 */
 
 /*
- 	This function returns either on or off depending on the state of an HTML checkbox 
-    input field returned from a post command.
+ 	This function returns either on or off depending on the state of an HTML checkbox
+    	input field returned from a post command.
 */
 function default_post_datetime_get_checked_state( $value )
 	{
-	if( $value == 'on' ) 
+	if( $value == 'on' )
 		{
 		return 'on';
 		}
@@ -27,15 +27,15 @@ function default_post_datetime_get_checked_state( $value )
 function default_post_datetime_save_user_profile_fields( $user_id )
 	{
 	if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
-	
+
 	update_user_meta( $user_id, 'default_post_datetime', $_POST['default_post_datetime'] );
 	}
 
 /*
  	This function is called to draw the user settings page for Just Writing.
 */
-function default_post_datetime_user_profile_fields( $user ) 
-	{ 
+function default_post_datetime_user_profile_fields( $user )
+	{
 	// If the user cannot edit posts or pages, then we don't want to display the options as they won't be using them.
 	if ( !current_user_can( 'edit_posts', $user ) || !current_user_can( 'edit_pages', $user ) ) { return; }
 
@@ -43,53 +43,56 @@ function default_post_datetime_user_profile_fields( $user )
 	// has been written yet, so let's do that now.
 	if( get_the_author_meta( 'default_post_datetime', $user->ID ) == "" )
 		{
-		if ( current_user_can( 'edit_user', $user->ID ) ) 
+		if ( current_user_can( 'edit_user', $user->ID ) )
 			{
 			update_user_meta( $user->ID, 'default_post_datetime', array( 'date' => '', 'time' => '', 'uselastpost' => '' ) );
 			}
 		}
-	
+
 	$options = get_the_author_meta( 'default_post_datetime', $user->ID );
 
 	if( !array_key_exists('disable', $options) ) { $options['disable'] = array(); }
 	if( !is_array($options['disable']) ) { $options['disable'] = array(); }
-	
+
+	// strtotime javascript from https://github.com/locutusjs/locutus/blob/master/src/php/datetime/strtotime.js
+	// Note: One minor change has been made to simply using it here, it is no longer defined as a module, but instead
+	// just as a function.
 	wp_register_script( 'strtotime_js', plugins_url( '', __FILE__ )  . '/strtotime.js' );
 	wp_enqueue_script( 'strtotime_js' );
-	
+
 	?>
-	<h3 id=DefaultPostDateTime><?php _e('Default Post Date and Time', 'default-post-datetime');?></h3>
+	<h3 id="DefaultPostDateTime"><?php _e('Default Post Date and Time', 'default-post-datetime');?></h3>
 
 	<script>
-	function DefaultPostDateTimeValidate() 
+	function DefaultPostDateTimeValidate()
 		{
 		dpdt_date = jQuery('#default_post_datetime_date').val();
 		dpdt_time = jQuery('#default_post_datetime_time').val();
-		
-		if( !strtotime( dpdt_date ) && dpdt_date != '' ) 
-			{ 
+
+		if( !strtotime( dpdt_date ) && dpdt_date != '' )
+			{
 			jQuery('#default-post-datetime-date-valid').hide();
 			jQuery('#default-post-datetime-date-invalid').show();
 			}
 		else
-			{ 
+			{
 			jQuery('#default-post-datetime-date-invalid').hide();
 			jQuery('#default-post-datetime-date-valid').show();
 			}
-	
-		if( !strtotime( "2009-05-04 " + dpdt_time ) ) 
-			{ 
+
+		if( !strtotime( "2009-05-04 " + dpdt_time ) )
+			{
 			jQuery('#default-post-datetime-time-valid').hide();
 			jQuery('#default-post-datetime-time-invalid').show();
 			}
 		else
-			{ 
+			{
 			jQuery('#default-post-datetime-time-invalid').hide();
 			jQuery('#default-post-datetime-time-valid').show();
 			}
 		}
 	</script>
-	
+
 	<table class="form-table">
 		<tr>
 			<th></th>
@@ -100,10 +103,10 @@ function default_post_datetime_user_profile_fields( $user )
 			</td>
 		</tr>
 	</table>
-	<table class="form-table" id='default_post_datetime_options_table'>	
+	<table class="form-table" id='default_post_datetime_options_table'>
 		<tr>
 			<th>
-			<?php echo __("Date", 'default-post-datetime');?>: 
+			<?php echo __("Date", 'default-post-datetime');?>:
 			</th>
 			<td>
 			<input type="text" id="default_post_datetime_date" name="default_post_datetime[date]" size='40' value='<?php echo $options['date']?>'><div id="default-post-datetime-date-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-date-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
@@ -112,7 +115,7 @@ function default_post_datetime_user_profile_fields( $user )
 
 		<tr>
 			<th>
-			<?php echo __("Time", 'default-post-datetime');?>: 
+			<?php echo __("Time", 'default-post-datetime');?>:
 			</th>
 			<td>
 			<input type="text" id="default_post_datetime_time" name="default_post_datetime[time]" size='10' value='<?php echo $options['time']?>'><div id="default-post-datetime-time-valid" class="dashicons dashicons-yes" style="font-size:26pt; color: lightgreen; display: none;"></div><div id="default-post-datetime-time-invalid" class="dashicons dashicons-no" style="font-size:26pt; color: red; display: none;"></div>
@@ -128,7 +131,7 @@ function default_post_datetime_user_profile_fields( $user )
 
 		<tr>
 			<th>
-			<?php echo __("Use latest scheduled post as the starting time", 'default-post-datetime');?>: 
+			<?php echo __("Use latest scheduled post as the starting time", 'default-post-datetime');?>:
 			</th>
 			<td>
 			<input type="checkbox" id="default_post_datetime_uselastpost" name="default_post_datetime[uselastpost]"<?php if( !array_key_exists( 'uselastpost', $options ) ) { $options['uselastpost'] = ''; } if( default_post_datetime_get_checked_state( $options['uselastpost'] ) == 'on' ) { echo ' CHECKED'; } ?>>
@@ -137,11 +140,20 @@ function default_post_datetime_user_profile_fields( $user )
 
 		<tr>
 			<th>
-			<?php echo __("Disable for post type", 'default-post-datetime');?>: 
+			<?php echo __("Use the next day without a post as the date", 'default-post-datetime');?>:
+			</th>
+			<td>
+			<input type="checkbox" id="default_post_datetime_usenextopenday" name="default_post_datetime[usenextopenday]"<?php if( !array_key_exists( 'usenextopenday', $options ) ) { $options['usenextopenday'] = ''; } if( default_post_datetime_get_checked_state( $options['usenextopenday'] ) == 'on' ) { echo ' CHECKED'; } ?>>
+			</td>
+		</tr>
+
+		<tr>
+			<th>
+			<?php echo __("Disable for post type", 'default-post-datetime');?>:
 			</th>
 			<td>
 			<?php
-				$post_types = get_post_types( '', 'objects' ); 
+				$post_types = get_post_types( '', 'objects' );
 
 				foreach ( $post_types as $post_type ) {
 					echo '			<input type="checkbox" id="default_post_datetime_disable_' . $post_type->name . '" name="default_post_datetime[disable][' . $post_type->name . ']"';
@@ -155,9 +167,9 @@ function default_post_datetime_user_profile_fields( $user )
 			?>
 			</td>
 		</tr>
-		
-		
+
+
 	</table>
-<?php 
+<?php
 	}
 ?>
